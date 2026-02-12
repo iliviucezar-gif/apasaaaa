@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Valentine ❤️</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #ffe4e1; font-family: 'Segoe UI', Tahoma, sans-serif;
+            overflow: hidden;
+        }
+
+        #ecran {
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; width: 100vw; height: 100vh;
+        }
+
+        .gif-container img {
+            width: 230px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+            margin-bottom: 20px;
+        }
+
+        h1 { color: #d63384; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.05); }
+
+        .butoane { display: flex; gap: 25px; position: relative; }
+
+        button {
+            padding: 15px 35px; font-size: 20px; font-weight: bold;
+            border: none; border-radius: 50px; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #da {
+            background-color: #ff4d6d; color: white;
+            animation: pulse 1.5s infinite; /* Efect de bătaie de inimă */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        #nu { background-color: #6c757d; color: white; }
+
+        /* Stil pentru inimile care cad */
+        .heart {
+            position: fixed; top: -10px; color: #ff4d6d;
+            font-size: 20px; user-select: none; z-index: 1000;
+        }
+    </style>
+
+    <script>
+        var clickuri = 0;
+        var texte = ["Sigură? 🤨", "Mai gândește-te! 🙄", "N-ai nicio șansă! 😂", "Te roooog! 🥺", "Chiar nu vrei? 🥺"];
+
+        function apasatNu() {
+            var btnNu = document.getElementById('nu');
+            btnNu.style.position = 'fixed';
+            var x = Math.random() * (window.innerWidth - 150);
+            var y = Math.random() * (window.innerHeight - 100);
+            btnNu.style.left = x + 'px';
+            btnNu.style.top = y + 'px';
+
+            if (clickuri < texte.length) {
+                btnNu.innerText = texte[clickuri];
+            }
+            clickuri++;
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            heart.animate([
+                { transform: 'translateY(0vh)' },
+                { transform: 'translateY(100vh)' }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                iterations: 1
+            });
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+
+        function apasatDa() {
+            // Pornim ploaia de inimi
+            setInterval(createHeart, 150);
+
+            document.getElementById('ecran').innerHTML = `
+                <div style="background-color:#ffccd5; height:100vh; width:100vw; display:flex; flex-direction:column; align-items:center; justify-content:center; animation: fadeIn 1s;">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM20ycHdzbmZ5bmR3amZyeGZyeGZyeGZyeGZyeGZyeGZyeGZyeCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KztT2c4u8mYYUiMKdJ/giphy.gif" width="250" style="border-radius:20px; margin-bottom:20px; border: 5px solid white;">
+                    <h1 style="color:#d63384; font-size:45px; text-align:center; font-family: 'Brush Script MT', cursive;">Te iubesc mult dragostea mea! 🥰🌹</h1>
+                </div>`;
+        }
+    </script>
+</head>
+<body>
+
+    <div id="ecran">
+        <div class="gif-container">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueW9oN3RrZzR4eG5oZ3R4eG5oZ3R4eG5oZ3R4eG5oZ3R4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
+        </div>
+        
+        <h1>Will you be my Valentine? ❤️</h1>
+
+        <div class="butoane">
+            <button id="da" onclick="apasatDa()">DA</button>
+            <button id="nu" onclick="apasatNu()">NU</button>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
